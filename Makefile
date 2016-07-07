@@ -4,6 +4,7 @@ VERSION ?= 1.11.2
 REPO = nginx
 NAME = nginx
 INSTANCE = default
+PORTS = -p 80:80 -p 443:443
 
 .PHONY: build push shell run start stop rm release
 
@@ -26,8 +27,11 @@ stop:
 	docker stop $(NAME)-$(INSTANCE)
 
 rm:
-	docker rm $(NAME)-$(INSTANCE)
+	docker rm -f $(NAME)-$(INSTANCE)
 
+logs:
+	docker logs $(NAME)-$(INSTANCE)
+	
 release: build
 	make push -e VERSION=$(VERSION)
 
