@@ -51,10 +51,20 @@ ${WITH_LUA} && {
   download_and_extract "${NGINX_SET_MISC_MODULE_DOWNLOAD_URL}" "${NGINX_SETUP_DIR}/nginx-set-misc-module"
 
   EXTRA_ARGS="${EXTRA_ARGS} --with-ld-opt='-Wl,-rpath,${LUAJIT_LIB}'  --add-dynamic-module=${NGINX_SETUP_DIR}/nginx-lua-module --add-dynamic-module=${NGINX_SETUP_DIR}/nginx-devel-module --add-dynamic-module=${NGINX_SETUP_DIR}/nginx-redis2-module --add-dynamic-module=${NGINX_SETUP_DIR}/nginx-set-misc-module"
+
+  mkdir -p /opt/openresty/lua-resty-redis
+  download_and_extract "https://github.com/openresty/lua-resty-redis/archive/v0.24.tar.gz" "/opt/openresty/lua-resty-redis"
+}
+
+${WITH_ECHO} && {
+  download_and_extract "https://github.com/openresty/echo-nginx-module/archive/v0.59.tar.gz" "${NGINX_SETUP_DIR}/nginx-echo-module"
+
+  EXTRA_ARGS="${EXTRA_ARGS} --add-dynamic-module=${NGINX_SETUP_DIR}/nginx-echo-module"
 }
 cd ${NGINX_SETUP_DIR}/nginx
 
 ./configure \
+  --with-debug \
   --prefix=/usr/share/nginx \
   --conf-path=/etc/nginx/nginx.conf \
   --sbin-path=/usr/sbin \
@@ -107,6 +117,6 @@ make -j$(nproc) && make install
 
 
 
-# apt-get purge -y --auto-remove ${BUILD_DEPENDENCIES}
-# rm -rf ${NGINX_SETUP_DIR}/{nginx,nginx-rtmp-module,ngx_pagespeed,libav}
-# rm -rf /var/lib/apt/lists/*
+apt-get purge -y --auto-remove ${BUILD_DEPENDENCIES}
+rm -rf ${NGINX_SETUP_DIR}/{nginx,nginx-rtmp-module,ngx_pagespeed,libav}
+rm -rf /var/lib/apt/lists/*

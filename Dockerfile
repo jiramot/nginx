@@ -18,6 +18,7 @@ ENV NGINX_VERSION=${NGINX_VERSION:-1.11.2} \
     LUAJIT_INC=/usr/local/include/luajit-2.0
 
 ARG WITH_LUA=true
+ARG WITH_ECHO=true
 
 COPY ./setup.sh ${NGINX_SETUP_DIR}/setup.sh
 
