@@ -7,7 +7,7 @@ NGINX_DEVEL_KIT_DOWNLOAD_URL="https://github.com/simpl/ngx_devel_kit/archive/v${
 NGINX_REDIS2_MODULE_DOWNLOAD_URL="https://github.com/openresty/redis2-nginx-module/archive/v0.13.tar.gz"
 NGINX_SET_MISC_MODULE_DOWNLOAD_URL="https://github.com/openresty/set-misc-nginx-module/archive/v0.30.tar.gz"
 
-RUNTIME_DEPENDENCIES="libpcre3 libssl1.0.0 libxslt1.1 libgeoip1"
+RUNTIME_DEPENDENCIES="libpcre3 libssl1.0.0 libxslt1.1 libgeoip1 vim iputils-ping"
 BUILD_DEPENDENCIES="build-essential make wget libpcre3-dev zlib1g-dev libgd-dev libssl-dev libxslt-dev libgeoip-dev"
 
 
