@@ -52,8 +52,9 @@ ${WITH_LUA} && {
 
   EXTRA_ARGS="${EXTRA_ARGS} --with-ld-opt='-Wl,-rpath,${LUAJIT_LIB}'  --add-dynamic-module=${NGINX_SETUP_DIR}/nginx-lua-module --add-dynamic-module=${NGINX_SETUP_DIR}/nginx-devel-module --add-dynamic-module=${NGINX_SETUP_DIR}/nginx-redis2-module --add-dynamic-module=${NGINX_SETUP_DIR}/nginx-set-misc-module"
 
-  mkdir -p /opt/openresty/lua-resty-redis
-  download_and_extract "https://github.com/openresty/lua-resty-redis/archive/v0.24.tar.gz" "/opt/openresty/lua-resty-redis"
+  mkdir -p /opt/openresty
+  download_and_extract "https://github.com/openresty/lua-resty-redis/archive/v0.24.tar.gz" "/opt/openresty"
+  download_and_extract "https://github.com/pintsized/lua-resty-redis-connector/archive/v0.03.tar.gz" "/opt/openresty"
 }
 
 ${WITH_ECHO} && {
