@@ -13,6 +13,8 @@ build:
 
 push:
 	docker push $(NS)/$(REPO):$(VERSION)
+	docker tag $(NS)/$(REPO):$(VERSION) $(NS)/$(REPO)
+	docker push $(NS)/$(REPO)
 
 shell:
 	docker run --rm --name $(NAME)-$(INSTANCE) -i -t $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(REPO):$(VERSION) /bin/bash
@@ -31,7 +33,7 @@ rm:
 
 logs:
 	docker logs $(NAME)-$(INSTANCE)
-	
+
 release: build
 	make push -e VERSION=$(VERSION)
 
