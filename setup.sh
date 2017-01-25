@@ -7,6 +7,7 @@ NGINX_DEVEL_KIT_DOWNLOAD_URL="https://github.com/simpl/ngx_devel_kit/archive/v${
 NGINX_REDIS2_MODULE_DOWNLOAD_URL="https://github.com/openresty/redis2-nginx-module/archive/v0.13.tar.gz"
 NGINX_SET_MISC_MODULE_DOWNLOAD_URL="https://github.com/openresty/set-misc-nginx-module/archive/v0.30.tar.gz"
 NGINX_PAGESPEED_DOWNLOAD_URL="https://github.com/pagespeed/ngx_pagespeed/archive/v${NPS_VERSION}-beta.zip"
+NGINX_ECHO_DOWNLOAD_URL="https://github.com/openresty/echo-nginx-module/archive/v0.59.tar.gz"
 
 RUNTIME_DEPENDENCIES="libpcre3 libssl1.0.0 libxslt1.1 libgeoip1 vim iputils-ping"
 BUILD_DEPENDENCIES="build-essential make wget libpcre3-dev zlib1g-dev libgd-dev libssl-dev libxslt-dev libgeoip-dev"
@@ -59,7 +60,7 @@ ${WITH_LUA} && {
 }
 
 ${WITH_ECHO} && {
-  download_and_extract "https://github.com/openresty/echo-nginx-module/archive/v0.59.tar.gz" "${NGINX_SETUP_DIR}/nginx-echo-module"
+  download_and_extract "${NGINX_ECHO_DOWNLOAD_URL}" "${NGINX_SETUP_DIR}/nginx-echo-module"
 
   EXTRA_ARGS="${EXTRA_ARGS} --add-dynamic-module=${NGINX_SETUP_DIR}/nginx-echo-module"
 }
