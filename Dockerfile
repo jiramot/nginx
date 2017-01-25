@@ -10,6 +10,7 @@ ENV NGINX_VERSION=${NGINX_VERSION:-1.11.2} \
     LUA_VERSION=0.10.5 \
     NGINX_DEVEL_KIT_VERSION=0.3.0 \
     LUAJIT_VERSION=2.0.4 \
+    NPS_VERSION=1.11.33.4 \
     NGINX_USER=nginx \
     NGINX_LOG_DIR=/var/log/nginx \
     NGINX_TEMP_DIR=/var/lib/nginx \
@@ -19,6 +20,7 @@ ENV NGINX_VERSION=${NGINX_VERSION:-1.11.2} \
 
 ARG WITH_LUA=true
 ARG WITH_ECHO=true
+ARG WITH_PAGESPEED=true
 
 COPY ./setup.sh ${NGINX_SETUP_DIR}/setup.sh
 
