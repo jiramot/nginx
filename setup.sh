@@ -84,48 +84,8 @@ cd ${NGINX_SETUP_DIR}/nginx
   --pid-path=/var/run/nginx.pid \
   --with-pcre-jit \
  ${EXTRA_ARGS}
-#
+
 make -j$(nproc) && make install
-
-# ./configure \
-#   --prefix=/usr/share/nginx \
-#   --conf-path=/etc/nginx/nginx.conf \
-#   --sbin-path=/usr/sbin \
-#   --http-log-path=/var/log/nginx/access.log \
-#   --error-log-path=/var/log/nginx/error.log \
-#   --lock-path=/var/lock/nginx.lock \
-#   --pid-path=/var/run/nginx.pid \
-#
-#   --http-client-body-temp-path=${NGINX_TEMP_DIR}/body \
-#   --http-fastcgi-temp-path=${NGINX_TEMP_DIR}/fastcgi \
-#   --http-proxy-temp-path=${NGINX_TEMP_DIR}/proxy \
-#   --http-scgi-temp-path=${NGINX_TEMP_DIR}/scgi \
-#   --http-uwsgi-temp-path=${NGINX_TEMP_DIR}/uwsgi \
-  # --with-pcre-jit \
-#   --with-ipv6 \
-#   --with-http_ssl_module \
-#   --with-http_stub_status_module \
-#   --with-http_realip_module \
-#   --with-http_auth_request_module \
-#   --with-http_addition_module \
-#   --with-http_dav_module \
-#   --with-http_geoip_module \
-#   --with-http_gunzip_module \
-#   --with-http_gzip_static_module \
-#   --with-http_image_filter_module \
-#   --with-http_v2_module \
-#   --with-http_sub_module \
-#   --with-http_xslt_module \
-#   --with-stream \
-#   --with-stream_ssl_module \
-#   # --with-mail \
-#   # --with-mail_ssl_module \
-#   --with-threads
- # ${EXTRA_ARGS}
-#
-# make -j$(nproc) && make install
-
-
 
 apt-get purge -y --auto-remove ${BUILD_DEPENDENCIES}
 rm -rf ${NGINX_SETUP_DIR}/{nginx,nginx-rtmp-module,ngx_pagespeed,libav}
