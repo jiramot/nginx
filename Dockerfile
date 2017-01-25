@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
-RUN sed -i -- 's/archive.ubuntu.com/mirror.kku.ac.th/g' /etc/apt/sources.list
+LABEL maintainer "Watchanon Numnam <jiramot@gmail.com>"
 
-MAINTAINER Watchanon Numnam "jiramot@gmail.com"
+RUN sed -i -- 's/archive.ubuntu.com/mirror.kku.ac.th/g' /etc/apt/sources.list
 
 ENV DEBIAN_FRONTEND noninteractive
 
