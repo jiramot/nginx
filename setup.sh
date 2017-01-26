@@ -6,11 +6,11 @@ LUA_JIT_DOWNLOAD_URL=http://luajit.org/download/LuaJIT-${LUAJIT_VERSION}.tar.gz
 NGINX_DEVEL_KIT_DOWNLOAD_URL="https://github.com/simpl/ngx_devel_kit/archive/v${NGINX_DEVEL_KIT_VERSION}.tar.gz"
 NGINX_REDIS2_MODULE_DOWNLOAD_URL="https://github.com/openresty/redis2-nginx-module/archive/v0.13.tar.gz"
 NGINX_SET_MISC_MODULE_DOWNLOAD_URL="https://github.com/openresty/set-misc-nginx-module/archive/v0.30.tar.gz"
-NGINX_PAGESPEED_DOWNLOAD_URL="https://github.com/pagespeed/ngx_pagespeed/archive/v${NPS_VERSION}-beta.zip"
+NGINX_PAGESPEED_DOWNLOAD_URL="https://github.com/pagespeed/ngx_pagespeed/archive/v${NPS_VERSION}-beta.tar.gz"
 NGINX_ECHO_DOWNLOAD_URL="https://github.com/openresty/echo-nginx-module/archive/v0.59.tar.gz"
 
-RUNTIME_DEPENDENCIES="libpcre3 libssl1.0.0 libxslt1.1 libgeoip1 vim iputils-ping"
-BUILD_DEPENDENCIES="build-essential make wget libpcre3-dev zlib1g-dev libgd-dev libssl-dev libxslt-dev libgeoip-dev"
+RUNTIME_DEPENDENCIES="libpcre3 libssl1.0.0 libxslt1.1 libgeoip1 vim iputils-ping libgd3"
+BUILD_DEPENDENCIES="build-essential make wget libpcre3-dev zlib1g-dev libgd-dev libssl-dev libxslt-dev libgeoip-dev libgd-dev"
 
 
 download_and_extract() {
@@ -67,7 +67,7 @@ ${WITH_ECHO} && {
 
 ${WITH_PAGESPEED} && {
   download_and_extract "${NGINX_PAGESPEED_DOWNLOAD_URL}" "${NGINX_SETUP_DIR}/nginx-pagespeed-module"
-  download_and_extract "https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz" "${NGINX_SETUP_DIR}/nginx-pagespeed-module/"
+  download_and_extract "https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz" "${NGINX_SETUP_DIR}/nginx-pagespeed-module/psol"
 
   EXTRA_ARGS="${EXTRA_ARGS} --add-dynamic-module=${NGINX_SETUP_DIR}/nginx-pagespeed-module"
 }
@@ -75,7 +75,6 @@ ${WITH_PAGESPEED} && {
 cd ${NGINX_SETUP_DIR}/nginx
 
 ./configure \
-  --with-debug \
   --prefix=/usr/share/nginx \
   --conf-path=/etc/nginx/nginx.conf \
   --sbin-path=/usr/sbin \
@@ -84,6 +83,25 @@ cd ${NGINX_SETUP_DIR}/nginx
   --lock-path=/var/lock/nginx.lock \
   --pid-path=/var/run/nginx.pid \
   --with-pcre-jit \
+  --with-ipv6 \
+  --with-http_ssl_module \
+  --with-http_stub_status_module \
+  --with-http_realip_module \
+  --with-http_auth_request_module \
+  --with-http_addition_module \
+  --with-http_dav_module \
+  --with-http_geoip_module \
+  --with-http_gunzip_module \
+  --with-http_gzip_static_module \
+  --with-http_image_filter_module \
+  --with-http_v2_module \
+  --with-http_sub_module \
+  --with-http_xslt_module \
+  --with-stream \
+  --with-stream_ssl_module \
+  --with-mail \
+  --with-mail_ssl_module \
+  --with-threads \
  ${EXTRA_ARGS}
 
 make -j$(nproc) && make install

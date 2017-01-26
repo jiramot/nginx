@@ -6,7 +6,7 @@ RUN sed -i -- 's/archive.ubuntu.com/mirror.kku.ac.th/g' /etc/apt/sources.list
 ENV DEBIAN_FRONTEND noninteractive
 
 ARG NGINX_VERSION
-ENV NGINX_VERSION=${NGINX_VERSION:-1.11.8} \
+ENV NGINX_VERSION=${NGINX_VERSION:-1.11.2} \
     LUA_VERSION=0.10.5 \
     NGINX_DEVEL_KIT_VERSION=0.3.0 \
     LUAJIT_VERSION=2.0.4 \
@@ -25,6 +25,9 @@ ARG WITH_PAGESPEED=true
 COPY ./setup.sh ${NGINX_SETUP_DIR}/setup.sh
 
 RUN bash ${NGINX_SETUP_DIR}/setup.sh
+
+RUN mkdir -p /mnt/data /etc/nginx/lua /etc/nginx/ssl
+VOLUME ["/mnt/data", "/etc/nginx/conf.d", "/etc/nginx/ssl"]
 
 ADD ./etc/nginx/conf.d/* /etc/nginx/conf.d/
 ADD ./etc/nginx/nginx.conf /etc/nginx
